@@ -53,32 +53,4 @@ public class loginController {
         }
         return "/login/login";
     }
-
-
-
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // 顯示登入頁面
-//        request.getRequestDispatcher("/Showloginform/Showloginform.html").forward(request, response);
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        // 取得表單資料
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-//
-//        // 查詢資料庫
-//        Bson filter = eq("username", username);
-//        Document document = collection.find(filter).first();
-//        if (document != null && document.getString("pwd").equals(password)) {
-//            // 登入成功，導向首頁
-//            response.sendRedirect("//todo 跳轉到登入畫面");
-//            return;
-//        }
-//
-//        // 登入失敗，顯示錯誤訊息
-//        request.setAttribute("error", "帳戶密碼錯誤");
-//        request.getRequestDispatcher("/template/Showloginform/Showloginform.jsp").forward(request, response);
-//    }
 }
