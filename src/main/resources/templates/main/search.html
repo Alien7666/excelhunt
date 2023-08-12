@@ -9,8 +9,13 @@
 </head>
 <body>
 <header>
-    <button class="login-button" th:href="@{/login}" >登入</button>
+    <!-- 若 isLoggedIn 為 true，顯示這個按鈕 -->
+    <button class="login-button" th:if="${isLoggedIn}" th:href="@{/logout}" >登出</button>
+    <!-- 若 isLoggedIn 為 false，顯示這個按鈕 -->
+    <button class="login-button" th:unless="${isLoggedIn}" th:href="@{/login}" >登入</button>
 </header>
+
+
 <main>
     <div class="search-container">
         <form action="/search" method="post">

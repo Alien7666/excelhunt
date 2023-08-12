@@ -48,8 +48,7 @@ public class loginController {
         if (user != null &&user.getPassword().equals(password)) {
             session.setAttribute("username", username);
             System.out.println("登入成功");
-            return "redirect:/";
-
+            return "redirect:/api/control";
         }
         return "/login/login";
     }

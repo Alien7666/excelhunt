@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +27,12 @@ public class SearchController {
     @Autowired
     private MonthlyInventoryRepository monthlyInventoryRepository;
 
-    // ...
+
 
     @GetMapping("/")
-    public String showSearchForm() {
-        // Return the name of the view that contains the search form.
-        // This could be the same view as the POST method if the form and results are on the same page.
+    public String showSearchForm(HttpSession session, Model model) {
+        boolean isLoggedIn = session.getAttribute("JSESSIONID") != null;
+        model.addAttribute("isLoggedIn", isLoggedIn);
         return "main/search";
     }
 
