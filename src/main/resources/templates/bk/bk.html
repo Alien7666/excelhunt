@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>後端管理</title>
     <link rel="stylesheet" th:href="@{/bk/bk.css}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <header>
         <h1>楷德蘆竹</h1>
+        <button class="logout" onclick="location.href='/logout'" >登出</button>
     </header>
     <p>目前的連結是： <span th:text="${link}"></span></p>
     <form action="#" th:action="@{/api/update-link}" method="post">

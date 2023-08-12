@@ -1,13 +1,17 @@
 body {
     font-family: Arial, sans-serif;
   }
-  
+
   header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
   }
-  
+  h1{
+    margin: 0;
+    color: #0020ff; /* 深藍色文字 */
+  }
   .login-button {
     background-color: #4CAF50;
     color: white;

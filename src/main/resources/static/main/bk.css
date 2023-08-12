@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(45deg, #ff9d9d, #ffd39d),
+    background: linear-gradient(45deg, #00fc93, #e600ff),
                 url('png-transparent-flower-desktop-pattern-flower-white-brown-leaf-thumbnail.png') repeat;
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;

@@ -1,58 +1,67 @@
+/* 基礎設定 */
 body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #fff;
+  font-family: 'Arial', sans-serif;
+  background-color: #e0f7fa; /* 淺藍色背景 */
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #e1f5fe; /* 淺藍色標題背景 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 小陰影效果 */
 }
 
-header h1 {
-    font-size: 24px;
-    margin: 0;
+h1 {
+  margin: 0;
+  color: #0277bd; /* 淺藍色文字 */
 }
 
-.file-link {
-    margin-bottom: 20px;
+.logout {
+  background-color: #C8E6C9; /* 淺綠色按鈕背景 */
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  color: #2E7D32; /* 深綠色按鈕文字 */
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.file-link a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-    background-color: #ccc;
-    color: #fff;
-    padding: 10px;
-    border: 1px solid #000;
-    cursor: pointer;
+.logout:hover {
+  background-color: #A5D6A7; /* 淺綠色按鈕背景（懸停時） */
 }
 
-.file-link a:hover {
-    background-color: #aaa;
+p {
+  padding: 20px;
+  font-size: 1.2em; /* 讓P標籤明顯 */
+  color: #0277bd; /* 淺藍色文字 */
 }
 
-.submit-button {
-    margin-top: 20px;
+form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.submit-button button {
-    display: block;
-    width: 100%;
-    height: 40px;
-    text-decoration: none;
-    background-color: #000;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+input[type="text"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #b0bec5; /* 淺灰色邊框 */
+  border-radius: 4px;
 }
 
-.submit-button button:hover {
-    background-color: #333;
+input[type="submit"] {
+  background-color: #C8E6C9; /* 淺綠色按鈕背景 */
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #A5D6A7; /* 淺綠色按鈕背景（懸停時） */
 }

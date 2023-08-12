@@ -10,6 +10,4 @@ public class ExcelApplication {
 		SpringApplication.run(ExcelApplication.class, args);
 	}
 
-
-
 }
