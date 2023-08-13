@@ -66,7 +66,12 @@
             <artifactId>tomcat-embed-core</artifactId>
             <version>10.1.11</version>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-storage</artifactId>
+			<version>2.26.0</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
