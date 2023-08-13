@@ -28,7 +28,7 @@ public class ControlController {
     @GetMapping("/read-link")
     public ResponseEntity<String> readLink() {
         try {
-            String LINK_FILE_PATH = "../../../python/synccloud/link_file.txt";
+            String LINK_FILE_PATH = "改成雲端連結";
             String link = Files.readString(Paths.get(LINK_FILE_PATH));
             return ResponseEntity.ok(link);
         } catch (IOException e) {
