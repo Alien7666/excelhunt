@@ -51,4 +51,10 @@ body {
     width: 400px;
     margin: 0 auto;
   }
-  
+  .no-underline {
+    text-decoration: none;
+  }
+
+  .no-underline:hover {
+    text-decoration: none;
+  }
