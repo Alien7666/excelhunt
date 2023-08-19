@@ -11,6 +11,10 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Controller
 public class SearchController {
 
@@ -31,8 +35,7 @@ public class SearchController {
 
     @GetMapping("/")
     public String showSearchForm(HttpSession session, Model model) {
-        boolean isLoggedIn = session.getAttribute("JSESSIONID") != null;
-        model.addAttribute("isLoggedIn", isLoggedIn);
+        model.addAttribute("isInitialLoad", true);
         return "main/search";
     }
 
@@ -57,11 +60,17 @@ public class SearchController {
         productInformationResults.addAll(productInformationRepository.searchBy貨品編號(query));
         productInformationResults.addAll(productInformationRepository.searchBy貨品名稱(query));
 
+        model.addAttribute("isStorageResultsEmpty", storageResults.isEmpty());
+        model.addAttribute("isMonthlyInventoryResultsEmpty", monthlyInventoryResults.isEmpty());
+        model.addAttribute("isGrossResultsEmpty", grossResults.isEmpty());
+        model.addAttribute("isProductInformationResultsEmpty", productInformationResults.isEmpty());
+
         model.addAttribute("storageResults", storageResults);
         model.addAttribute("monthlyInventoryResults", monthlyInventoryResults);
         model.addAttribute("grossResults", grossResults);
         model.addAttribute("productInformationResults", productInformationResults);
 
+        model.addAttribute("isInitialLoad", false);
         return "main/search";
     }
 }
