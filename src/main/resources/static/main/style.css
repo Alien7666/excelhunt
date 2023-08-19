@@ -1,60 +1,110 @@
+
 body {
     font-family: Arial, sans-serif;
-  }
+}
 
-  header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-  }
-  h1{
+}
+
+h1 {
     margin: 0;
-    color: #0020ff; /* 深藍色文字 */
-  }
-  .login-button {
-    background-color: #4CAF50;
+    color: #0020ff;
+}
+
+.login-button {
+    background-color: #FF5733;
     color: white;
     border: none;
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
-  }
-  
-  main {
+}
+
+main {
     text-align: center;
     margin-top: 50px;
-  }
-  
-  .search-container {
-    margin-bottom: 20px;
-  }
-  
-  #search-input {
-    padding: 10px;
-    width: 300px;
-    font-size: 16px;
-  }
-  
-  #search-button {
+    padding: 20px;
+}
+
+
+
+
+
+#search-button {
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-  }
-  
-  #search-results {
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.no-underline:hover {
+    text-decoration: none;
+}
+
+/* Enhanced card style for search results with dynamic background */
+.result-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight white background for better visibility */
     border: 1px solid #ccc;
     padding: 20px;
-    width: 400px;
-    margin: 0 auto;
-  }
-  .no-underline {
-    text-decoration: none;
-  }
+    margin: 30px 0; /* Increased margin for clearer separation */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-  .no-underline:hover {
-    text-decoration: none;
-  }
+
+/* Flexbox layout for main content */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Gap between cards */
+}
+
+/* Responsive design for search result cards */
+.result-card {
+    flex: 1 1 300px; /* Flexbox grow, shrink, base width */
+    max-width: 400px; /* Maximum width of a card */
+    width: 100%; /* Take full width up to the max-width */
+    box-sizing: border-box;
+}
+
+/* Flexbox layout for search container */
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px; /* Gap between search input and button */
+
+    justify-content: flex-start;  /* 將內容對齊到容器的起始位置 */
+    /*max-width: 420px;  !* 設定一個最大寬度，使輸入框和按鈕可以在同一行內 *!*/
+    margin: 0 auto;  /* 使容器在頁面中居中 */
+    flex-wrap: nowrap;  /* 強制不允許換行 */
+}
+.search-container form {
+    width: 100%;  /* 使 form 元素填滿其父容器 */
+    display: flex;  /* 將 form 設置為彈性盒子 */
+    justify-content: center;  /* 確保內部元素（輸入框和按鈕）從左側開始排列 */
+}
+
+
+#search-input {
+    flex: 1 1 200px; /* Flexbox grow, shrink, base width */
+    max-width: 300px; /* Maximum width for search input */
+    width: 100%; /* Take full width up to the max-width */
+
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    margin-right: 10px;  /* 添加這行來給輸入框右側留有10像素的間距 */
+}
