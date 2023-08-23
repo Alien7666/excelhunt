@@ -15,7 +15,7 @@
         </a>
         <button class="logout" onclick="location.href='/logout'" >登出</button>
     </header>
-    <p>目前的連結是： <a th:href="${link}" th:text="${link}" target="_blank"></a></p>
+    <p>目前的連結是：<a th:href="${link}" th:text="${link}" target="_blank"></a></p>
     <form action="/update-link" method="post">
         <label for="newLink">新連結:</label>
         <input type="text" id="newLink" name="newLink">
