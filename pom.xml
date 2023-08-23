@@ -88,6 +88,9 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<finalName>Excelhunt</finalName>
+
 	</build>
 	<repositories>
 		<repository>

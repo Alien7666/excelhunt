@@ -22,5 +22,6 @@ public class product_information {
 
     private String Unnamed_3;
 
+
     private String 期末數量;
 }
