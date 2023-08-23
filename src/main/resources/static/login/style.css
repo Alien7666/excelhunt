@@ -1,46 +1,88 @@
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin: 0;
+    color: rgb(15, 0, 255);
+    padding: 10px 20px;
+
+}
+.no-underline {
+    text-decoration: none;
+    display: inline-block;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, #00ff25, #0080ff),repeat;
+    animation: Gradient 15s ease infinite;
+    position: relative;
+    background-size: 400% 1000%;
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
 }
 
 .container {
+    text-align: center;
     width: 300px;
-    padding: 16px;
-    background-color: white;
-    margin: 0 auto;
-    margin-top: 100px;
-    border: 1px solid black;
-    border-radius: 4px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 input[type=text], input[type=password] {
-    width: 100%;
+    width: 90%;  /* Adjusted width to provide equal padding on both sides */
     padding: 15px;
-    margin: 5px 0 22px 0;
+    margin: 5px 0;
     display: inline-block;
-    border: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     background: #f1f1f1;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 input[type=text]:focus, input[type=password]:focus {
     background-color: #ddd;
-    outline: none;
+    transform: translateY(-2px);
 }
 
 button {
-    background-color: #4CAF50;
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #83a4d4;
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
     width: 100%;
-    opacity: 0.9;
+    font-weight: bold;  /* Make button text clearer */
+    margin-top: 20px;
 }
 
 button:hover {
-    opacity:1;
-}
-
-h2 {
-    text-align: center;
+    background-color: #b6fbff;
+    transform: translateY(-2px);
 }

@@ -8,6 +8,8 @@
   <link rel="stylesheet" th:href="@{/main/style.css}"/>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
+  <link rel="shortcut icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
  </head>
  <body>
   <header>
@@ -54,6 +56,11 @@
       <span th:text="${result.儲位資料}">
       </span>
      </p>
+     <p>
+      產品編號.1:
+      <span th:text="${result.產品編號_1}">
+      </span>
+     </p>
     </div>
    </div>
    <div class="result-card" style="background-color: #cba77a" th:if="${!isInitialLoad and !isProductInformationResultsEmpty}">
@@ -86,6 +93,16 @@
      <p>
       類別名稱:
       <span th:text="${result.類別名稱}">
+      </span>
+     </p>
+     <p>
+      貨品廠牌:
+      <span th:text="${result.貨品廠牌}">
+      </span>
+     </p>
+     <p>
+      貨品條碼:
+      <span th:text="${result.貨品條碼}">
       </span>
      </p>
      <p>

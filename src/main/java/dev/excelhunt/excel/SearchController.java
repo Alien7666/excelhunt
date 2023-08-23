@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller
 public class SearchController {
@@ -48,6 +46,7 @@ public class SearchController {
         storageResults.addAll(storageInformationRepository.searchBytypename(query));
         storageResults.addAll(storageInformationRepository.searchBystorid(query));
 
+
         List<monthly_inventory> monthlyInventoryResults = new ArrayList<>();
         monthlyInventoryResults.addAll(monthlyInventoryRepository.searchBy貨品編號(query));
         monthlyInventoryResults.addAll(monthlyInventoryRepository.searchBy貨品名稱(query));
@@ -55,6 +54,12 @@ public class SearchController {
         List<gross> grossResults = new ArrayList<>();
         grossResults.addAll(grossRepository.searchBy貨品編號(query));
         grossResults.addAll(grossRepository.searchBy貨品名稱(query));
+        grossResults.addAll(grossRepository.searchBy流水編號(query));
+        grossResults.addAll(grossRepository.searchBy貨品條碼(query));
+        grossResults.addAll(grossRepository.searchBy貨品廠牌(query));
+        grossResults.addAll(grossRepository.searchBy類別編號(query));
+        grossResults.addAll(grossRepository.searchBy類別名稱(query));
+
 
         List<product_information> productInformationResults = new ArrayList<>();
         productInformationResults.addAll(productInformationRepository.searchBy貨品編號(query));

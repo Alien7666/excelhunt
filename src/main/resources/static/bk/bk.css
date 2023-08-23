@@ -1,7 +1,11 @@
 /* 基礎設定 */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #e0f7fa; /* 淺藍色背景 */
+  background: linear-gradient(160deg, #00ffd9, #00bbff, #c700ff);
+  background-size: 200% 200%;
+  animation: gradientAnimation 8s infinite linear; /* Adding background animation */
+  min-height: 100vh; /* Ensure it fills the entire screen */
+
   margin: 0;
   padding: 0;
 }
@@ -11,57 +15,101 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #e1f5fe; /* 淺藍色標題背景 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 小陰影效果 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   margin: 0;
-  color: #0277bd; /* 淺藍色文字 */
+  color: #0277bd;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); /* Adding text shadow */
 }
 
 .logout {
-  background-color: #C8E6C9; /* 淺綠色按鈕背景 */
+  background-color: #00ffa6;
   border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  color: #2E7D32; /* 深綠色按鈕文字 */
+  border-radius: 20px; /* Making button more rounded */
+  padding: 5px 20px;
+  color: #000000;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding box shadow */
 }
 
 .logout:hover {
-  background-color: #A5D6A7; /* 淺綠色按鈕背景（懸停時） */
+  background-color: #00cc89;
+  transform: translateY(-2px); /* Button will move up slightly on hover */
 }
 
 p {
   padding: 20px;
-  font-size: 1.2em; /* 讓P標籤明顯 */
-  color: #0277bd; /* 淺藍色文字 */
+  font-size: 1.2em;
+  color: #0277bd;
 }
 
 form {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centering form elements */
 }
 
 input[type="text"] {
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #b0bec5; /* 淺灰色邊框 */
-  border-radius: 4px;
+  border: 1px solid #b0bec5;
+  border-radius: 20px; /* Making input more rounded */
+  width: 80%; /* Setting width */
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+input[type="text"]:focus {
+  border-color: #4fc3f7; /* Changing border color on focus */
+  box-shadow: 0 0 5px #4fc3f7; /* Adding shadow on focus */
+}
 input[type="submit"] {
-  background-color: #C8E6C9; /* 淺綠色按鈕背景 */
+  background-color: #00ffa6;
   border: none;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 20px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 input[type="submit"]:hover {
-  background-color: #A5D6A7; /* 淺綠色按鈕背景（懸停時） */
+  background-color: #00cc89;
+  transform: translateY(-2px);
 }
+
+span {
+  word-wrap: break-word;
+}
+
+a {
+  word-wrap: break-word;
+  text-decoration: none;
+  color: #0277bd; /* Adding link color */
+  transition: color 0.3s; /* Transition effect */
+}
+
+a:hover {
+  color: #01579b; /* Changing link color on hover */
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 100% 0%; }
+  50% { background-position: 0% 100%; }
+  100% { background-position: 100% 0%; }
+}
+
+
+
+form {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;  /* 更明顯的圓角效果 */
+  padding: 30px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 80%;  /* 設定最大寬度 */
+  margin: 0 auto;  /* 水平置中 */
+}
+

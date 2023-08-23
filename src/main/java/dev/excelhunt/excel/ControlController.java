@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
-
+import org.springframework.core.io.ClassPathResource;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -23,7 +23,8 @@ public class ControlController {
     private Storage storage;
 
     public ControlController() throws IOException {
-        GoogleCredentials credentials = GoogleCredentials.fromStream(new FileInputStream("src/main/resources/excel-cloud-search-703c4ad642b3.json"));
+        ClassPathResource resource = new ClassPathResource("templates/excel-cloud-search-703c4ad642b3.json");
+        GoogleCredentials credentials = GoogleCredentials.fromStream(resource.getInputStream());
         storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
     }
 
@@ -64,7 +65,7 @@ public class ControlController {
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
         storage.create(blobInfo, bytes);
 
-        return "redirect:/";
+        return "redirect:/control";
     }
 
 

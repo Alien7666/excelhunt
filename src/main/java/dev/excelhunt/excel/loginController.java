@@ -3,9 +3,7 @@ package dev.excelhunt.excel;
 import com.mongodb.client.*;
 import jakarta.servlet.http.HttpSession;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +37,7 @@ public class loginController {
 
     @GetMapping("/login")
     public String Showloginform(){
-        return "/login/login";
+        return "login/login";
     }
 
     @PostMapping("/login")
@@ -50,6 +48,6 @@ public class loginController {
             System.out.println("登入成功");
             return "redirect:/control";
         }
-        return "/login/login";
+        return "login/login";
     }
 }

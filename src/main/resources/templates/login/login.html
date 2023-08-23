@@ -4,9 +4,16 @@
     <title>登入</title>
     <link rel="stylesheet" th:href="@{/login/style.css}">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
+    <link rel="shortcut icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h2>登入頁</h2>
+    <a class="no-underline" href="/">
+        <h1>
+            楷德蘆竹
+        </h1>
+    </a>
         <form th:action="@{/login}" method="post">
             <div class="container">
                 <label for="username"><b>用戶名</b></label>
