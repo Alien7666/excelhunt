@@ -86,3 +86,34 @@ button:hover {
     background-color: #b6fbff;
     transform: translateY(-2px);
 }
+
+
+.error-message {
+    color: red; /* Change color to red */
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center; /* Center the text */
+}
+
+/*顯示密碼*/
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;   /* 進一步增大圖標大小 */
+    position: absolute;
+    right: 23px;      /* 進一步微調位置以確保其位於輸入框內部 */
+    top: 57%;
+    transform: translateY(-50%);
+    outline: none;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    width: 42px;      /* 進一步增加寬度 */
+    height: 38px;     /* 進一步增加高度 */
+    box-shadow: none;       /* 移除陰影 */
+}
+.toggle-password:hover {
+    background-color: unset;
+    transform: translateY(-50%) scale(1.2);
+}

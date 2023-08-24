@@ -16,13 +16,29 @@
     </a>
         <form th:action="@{/login}" method="post">
             <div class="container">
-                <label for="username"><b>用戶名</b></label>
-                <input type="text" placeholder="Enter Username" name="username" id="username" required>
+                <label for="username"><b>帳號</b></label>
+                <input type="text" placeholder="請輸入帳號" name="username" id="username" required>
                 <label for="password"><b>密碼</b></label>
-                <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
+                <input type="password" placeholder="請輸入密碼" name="password" id="password" required>
+                <button class="toggle-password" onclick="togglePasswordVisibility()" type="button">🙈</button>
                 <button type="submit">登入</button>
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
             </div>
         </form>
     </body>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById('password');
+            var toggleButton = document.querySelector('.toggle-password');
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.textContent = '🙊';
+            } else {
+                passwordInput.type = "password";
+                toggleButton.textContent='🙈';
+            }
+        }
+    </script>
 </html>
