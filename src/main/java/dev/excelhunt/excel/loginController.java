@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,13 +42,14 @@ public class loginController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         User user = userRepository.findByUsername(username);
         if (user != null &&user.getPassword().equals(password)) {
             session.setAttribute("username", username);
             System.out.println("登入成功");
             return "redirect:/control";
         }
+        model.addAttribute("errorMessage", "帳號或密碼錯誤!");
         return "login/login";
     }
 }
