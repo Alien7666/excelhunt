@@ -1,12 +1,15 @@
 package dev.excelhunt.excel;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
+//import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +35,18 @@ public class SearchController {
 
 
     @GetMapping("/")
-    public String showSearchForm(HttpSession session, Model model) {
+    public String showSearchForm(HttpSession session, Model model, Authentication authentication) {
         model.addAttribute("isInitialLoad", true);
+        if (authentication != null && authentication.isAuthenticated()) {
+            model.addAttribute("isLoggedIn", true);
+        } else {
+            model.addAttribute("isLoggedIn", false);
+        }
         return "main/search";
     }
 
     @PostMapping("/search")
-    public String search(@RequestParam("query") String query, Model model) {
+    public String search(@RequestParam("query") String query, Model model, Authentication authentication) {
 
         List<storage_information> storageResults = new ArrayList<>();
         storageResults.addAll(storageInformationRepository.searchByPW(query));
@@ -74,6 +82,13 @@ public class SearchController {
         model.addAttribute("monthlyInventoryResults", monthlyInventoryResults);
         model.addAttribute("grossResults", grossResults);
         model.addAttribute("productInformationResults", productInformationResults);
+
+        if (authentication != null) {
+            model.addAttribute("isLoggedIn", true);
+        } else {
+            model.addAttribute("isLoggedIn", false);
+        }
+
 
         model.addAttribute("isInitialLoad", false);
         return "main/search";

@@ -1,7 +1,10 @@
 package dev.excelhunt.excel;
 
 import com.google.cloud.storage.*;
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,10 +32,10 @@ public class ControlController {
     }
 
     @GetMapping("/control")
-    public ModelAndView controlPage(HttpSession session) {
+    public ModelAndView controlPage(Authentication authentication) {
         ModelAndView modelAndView;
-        // 檢查session是否包含username
-        if (session.getAttribute("username") != null) {
+        // 檢查authentication是否為null
+        if (authentication != null) {
             // 如果用戶已登入，顯示管理頁面
             modelAndView = new ModelAndView("bk/bk");
 

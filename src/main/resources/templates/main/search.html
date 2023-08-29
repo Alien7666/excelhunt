@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="zh-Hant">
  <head>
   <title>
    搜尋網站
   </title>
-  <link rel="stylesheet" th:href="@{/main/bk.css}"/>
-  <link rel="stylesheet" th:href="@{/main/style.css}"/>
+  <link th:media="all" type="text/css" th:rel="stylesheet" th:href="@{/main/bk.css}"/>
+  <link th:media="all" type="text/css" th:rel="stylesheet" th:href="@{/main/style.css}"/>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <link rel="icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
@@ -18,18 +19,24 @@
      楷德蘆竹
     </h1>
    </a>
-   <!-- 若 isLoggedIn 為 true，顯示這個按鈕 -->
-   <button class="login-button" th:href="@{/logout}" th:if="${isLoggedIn}">
-    登出
-   </button>
-   <!-- 若 isLoggedIn 為 false，顯示這個按鈕 -->
-   <button class="login-button" onclick="location.href='/login'" th:unless="${isLoggedIn}">
-    登入
-   </button>
+   <div th:with="isLoggedIn=${isLoggedIn != null ? isLoggedIn : false}">
+    <!-- 若 isLoggedIn 為 true，顯示這個按鈕 -->
+       <button class="login-button" onclick="location.href='/control'" th:if="${isLoggedIn}">
+        管理
+       </button>
+       <button class="login-button" onclick="location.href='/logout'" th:if="${isLoggedIn}">
+        登出
+       </button>
+       <!-- 若 isLoggedIn 為 false，顯示這個按鈕 -->
+       <button class="login-button" onclick="location.href='/login'" th:unless="${isLoggedIn}">
+        登入
+       </button>
+   </div>
   </header>
   <main>
    <div class="search-container">
     <form action="/search" method="post">
+     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
      <input id="search-input" name="query" placeholder="輸入搜尋內容" type="text"/>
      <button id="search-button" type="submit">
       搜尋
@@ -43,22 +50,22 @@
     <div th:each="result : ${storageResults}">
      <p>
       產品編號:
-      <span th:text="${result.產品編號}">
+      <span th:text="${result['產品編號']}">
       </span>
      </p>
      <p>
       品名規格:
-      <span th:text="${result.品名規格}">
+       <span th:text="${result['品名規格']}">
       </span>
      </p>
      <p>
       儲位:
-      <span th:text="${result.儲位資料}">
+       <span th:text="${result['儲位資料']}">
       </span>
      </p>
      <p>
       產品編號.1:
-      <span th:text="${result.產品編號_1}">
+       <span th:text="${result['產品編號_1']}">
       </span>
      </p>
     </div>
@@ -70,12 +77,12 @@
     <div th:each="result : ${productInformationResults}">
      <p>
       貨品編號:
-      <span th:text="${result.貨品編號}">
+       <span th:text="${result['貨品編號']}">
       </span>
      </p>
      <p>
       貨品名稱:
-      <span th:text="${result.貨品名稱}">
+       <span th:text="${result['貨品名稱']}">
       </span>
      </p>
     </div>
@@ -87,27 +94,22 @@
     <div th:each="result : ${grossResults}">
      <p>
       貨品名稱:
-      <span th:text="${result.貨品名稱}">
+       <span th:text="${result['貨品名稱']}">
       </span>
      </p>
      <p>
       類別名稱:
-      <span th:text="${result.類別名稱}">
+      <span th:text="${result['類別名稱']}">
       </span>
      </p>
      <p>
       貨品廠牌:
-      <span th:text="${result.貨品廠牌}">
+       <span th:text="${result['貨品廠牌']}">
       </span>
      </p>
      <p>
       貨品條碼:
-      <span th:text="${result.貨品條碼}">
-      </span>
-     </p>
-     <p>
-      貨品廠牌:
-      <span th:text="${result.貨品廠牌}">
+       <span th:text="${result['貨品條碼']}">
       </span>
      </p>
     </div>
@@ -119,22 +121,22 @@
     <div th:each="result : ${monthlyInventoryResults}">
      <p>
       產品編號:
-      <span th:text="${result.貨品名稱}">
+       <span th:text="${result['貨品名稱']}">
       </span>
      </p>
      <p>
       期初數量:
-      <span th:text="${result.期初數量}">
+       <span th:text="${result['期初數量']}">
       </span>
      </p>
      <p>
       進貨數量:
-      <span th:text="${result.進貨數量}">
+       <span th:text="${result['進貨數量']}">
       </span>
      </p>
      <p>
       進貨單價:
-      <span th:text="${result.進貨單價}">
+       <span th:text="${result['進貨單價']}">
       </span>
      </p>
     </div>

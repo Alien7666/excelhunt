@@ -8,13 +8,27 @@ body {
   
   @keyframes gradientAnimation {
     0% {
-      background-position: 0% 50%;
+      background-position: 0 50%;
     }
     50% {
       background-position: 100% 50%;
     }
     100% {
-      background-position: 0% 50%;
+      background-position: 0 50%;
     }
   }
-  
+
+@keyframes slideUpFadeIn {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.result-card {
+    animation: slideUpFadeIn 0.8s forwards;
+}
