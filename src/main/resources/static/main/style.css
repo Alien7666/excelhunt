@@ -22,6 +22,7 @@ h1 {
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 20px;
 }
 
 main {
@@ -30,10 +31,6 @@ main {
     padding: 20px;
 }
 
-
-
-
-
 #search-button {
     background-color: #4CAF50;
     color: white;
@@ -41,6 +38,7 @@ main {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 20px;
 }
 
 .no-underline {
@@ -106,15 +104,14 @@ main {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    margin-right: 10px;  /* 添加這行來給輸入框右側留有10像素的間距 */
-}
-
-.login-button{
+    margin-right: 20px;  /* 添加這行來給輸入框右側留有10像素的間距 */
     border-radius: 20px;
 }
-#search-button{
-    border-radius: 20px;
+.login-button:hover{
+    background-color: #e54e2d;
+    transform: translateY(-2px);
 }
-form input[type="text"]{
-    border-radius: 20px;
+#search-button:hover{
+    background-color: #449d48;
+    transform: translateY(-2px);
 }
