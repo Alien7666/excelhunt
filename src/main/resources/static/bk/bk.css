@@ -1,11 +1,13 @@
+:root {
+  --header-height: 62px;  /* Assuming a standard header height, this can be adjusted */
+}
 /* 基礎設定 */
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(160deg, #00ffd9, #00bbff, #c700ff);
+  background: linear-gradient(160deg, #b7e6fd, #cfc2fd, #e69efc);
   background-size: 200% 200%;
-  animation: gradientAnimation 8s infinite linear; /* Adding background animation */
+  animation: gradientAnimation 8s infinite ease-in-out alternate; /* Adding background animation */
   min-height: 100vh; /* Ensure it fills the entire screen */
-
   margin: 0;
   padding: 0;
 }
@@ -16,12 +18,15 @@ header {
   align-items: center;
   padding: 10px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 h1 {
   margin: 0;
   color: #0277bd;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); /* Adding text shadow */
+  flex: 1;
+  text-align: center;
 }
 
 .logout {
@@ -97,9 +102,11 @@ a:hover {
 }
 
 @keyframes gradientAnimation {
-  0% { background-position: 100% 0%; }
-  50% { background-position: 0% 100%; }
-  100% { background-position: 100% 0%; }
+  0% { background-position: 0 100%; }
+  25% { background-position: 100% 100%; }
+  50% { background-position: 100% 0; }
+  75% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
 }
 
 
@@ -112,4 +119,130 @@ form {
   max-width: 80%;  /* 設定最大寬度 */
   margin: 0 auto;  /* 水平置中 */
 }
+
+.title-container {
+  flex: 1;
+  text-align: center;
+}
+
+.button-container {
+  margin-left: auto;
+  padding-right: 20px;
+}
+
+
+
+/*側邊攔*/
+#menu-button {
+  margin-right: auto;
+  margin-left: 20px;
+  z-index: 1001;  /* Ensuring it's on top of side-menu */
+  background-color: #00ffa6;
+  border: none;
+  border-radius: 20px; /* Making button more rounded */
+  padding: 5px 20px;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+}
+
+
+#side-menu {
+  transition: transform 0.7s ease-in-out;
+  transform: translateX(-100%);
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 20%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#side-menu:not(.hidden) {
+  transform: translateX(0);
+}
+
+.title-container h1 a {
+  display: inline;  /* Make it take only the space of the text */
+  background: none;  /* Ensure no background color */
+  color: inherit;  /* Keep the original text color */
+  text-decoration: none;  /* No underline */
+  padding: 0;  /* No padding */
+  height: auto;  /* Auto adjust the height based on content */
+  width: auto;  /* Auto adjust the width based on content */
+  line-height: inherit;  /* Keep the line height consistent */
+}
+.placeholder {
+  flex: 1.5;
+}
+@media (max-width: 768px) {
+  .placeholder {
+    flex: 0.9;
+  }
+}
+@media (max-width: 576px) {
+  .placeholder {
+    flex: 0.5;
+  }
+}
+@media (max-width: 650px) {
+  #side-menu {
+    width: 50%;  /* Adjust width to not occupy entire screen width */
+    top: 100px;  /* Position it further below the header to avoid overlap */
+    height: calc(100% - 100px);  /* Adjust height to account for the header and avoid occupying entire height */
+  }
+}
+@media (max-width: 455px) {
+  #side-menu {
+    width: 75%;  /* Adjust width to occupy entire screen width */
+    top: 104px;  /* Position it further below the header to avoid overlap */
+    height: calc(100% - 104px);  /* Adjust height to account for the header and avoid occupying entire height */
+  }
+}
+@media (min-width: 455px) and (max-width: 655px) {
+  #side-menu {
+    width: 50%;  /* Adjust width to occupy entire screen width */
+    top: 62px;  /* Position it further below the header to avoid overlap */
+    height: calc(100% - 62px);  /* Adjust height to account for the header and avoid occupying entire height */
+  }
+}
+@media(max-width:326px){
+  #side-menu {
+    width: 75%;  /* Adjust width to occupy entire screen width */
+    top: 188px;  /* Position it further below the header to avoid overlap */
+    height: calc(100% - 188px);  /* Adjust height to account for the header and avoid occupying entire height */
+  }
+}
+@media (min-width: 656px) and (max-width: 1000px) {
+  #side-menu {
+    width: 35%;  /* Adjust width to occupy entire screen width */
+    top: 62px;  /* Position it further below the header to avoid overlap */
+    height: calc(100% - 62px);  /* Adjust height to account for the header and avoid occupying entire height */
+  }
+}
+
+#menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+#menu li{
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+}
+#menu li a{
+  color: #fff;
+}
+
+#menu li:last-child {
+  border-bottom: none;
+}
+
 

@@ -117,3 +117,14 @@ button:hover {
     background-color: unset;
     transform: translateY(-50%) scale(1.2);
 }
+.password-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;  /* Same width as the input to make sure the button is positioned inside */
+}
+
+/* Update the toggle-password CSS to adjust its position based on the new container */
+.toggle-password {
+    right: 5px;  /* Adjusted to position it correctly inside the container */
+    top: 50%;    /* Adjusted to center it vertically inside the container */
+}

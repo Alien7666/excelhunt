@@ -10,10 +10,21 @@
 </head>
 <body>
     <header>
-        <a href="/">
-            <h1>楷德蘆竹</h1>
-        </a>
-        <button class="logout" onclick="location.href='/logout'" >登出</button>
+        <button id="menu-button">☰</button>
+        <div id="side-menu" class="hidden">
+            <!-- Menu items will be placed here -->
+            <ul id="menu"></ul>
+        </div>
+        <div class="placeholder"></div>
+        <div class="title-container">
+            <a href="/">
+                <h1>楷德蘆竹</h1>
+            </a>
+        </div>
+        <div class="placeholder"></div>
+        <div class="button-container">
+            <button class="logout" onclick="location.href='/logout'" >登出</button>
+        </div>
     </header>
     <p>目前的連結是：<a th:href="${link}" th:text="${link}" target="_blank"></a></p>
     <form action="/update-link" method="post">
@@ -21,5 +32,41 @@
         <input type="text" id="newLink" name="newLink">
         <input type="submit" value="更新連結">
     </form>
+    <script>
+        document.getElementById('menu-button').addEventListener('click', function() {
+            var menu = document.getElementById('side-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+        document.addEventListener('click', function(event) {
+            var menu = document.getElementById('side-menu');
+            var button = document.getElementById('menu-button');
+            if (!menu.contains(event.target) && !button.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Add menu items
+        document.getElementById("menu-button").addEventListener("click", function() {
+            fetch("/getMenuItems")
+                .then(response => response.json())
+                .then(data => {
+                    var menu = document.getElementById("menu");
+                    menu.innerHTML = "";  // 清空先前的選單項目
+                    data.forEach(item => {
+                        var menuItem = document.createElement("li");
+                        var link = document.createElement("a");
+                        link.textContent = item.name;
+                        link.href = item.url;
+                        menuItem.appendChild(link);
+                        menu.appendChild(menuItem);
+                    });
+                })
+                .catch(error => console.error("Error fetching menu items:", error));
+        });
+    </script>
 </body>
 </html>

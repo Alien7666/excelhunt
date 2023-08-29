@@ -19,12 +19,18 @@
                 <label for="username"><b>帳號</b></label>
                 <input type="text" placeholder="請輸入帳號" name="username" id="username" required>
                 <label for="password"><b>密碼</b></label>
-                <input type="password" placeholder="請輸入密碼" name="password" id="password" required>
-                <button class="toggle-password" onclick="togglePasswordVisibility()" type="button">🙈</button>
-                <button type="submit">登入</button>
-                <div th:if="${errorMessage}" class="error-message">
-                    <p th:text="${errorMessage}"></p>
+                <div class="password-container">
+                    <input id="password" name="password" placeholder="請輸入密碼" required="" type="password"/>
+                    <button class="toggle-password" onclick="togglePasswordVisibility()" type="button">🙈</button>
                 </div>
+                <button type="submit">登入</button>
+<!--                <div th:if="${errorMessage}" class="error-message">-->
+<!--                    <p th:text="${errorMessage}"></p>-->
+<!--                </div>-->
+                <!-- 檢查 URL 中是否有 'error' 參數 -->
+                <th:block th:if="${param.error}" th:class="error-message">
+                    <p class="alert alert-danger">登入失敗，請檢查您的帳號或密碼。</p>
+                </th:block>
             </div>
         </form>
     </body>

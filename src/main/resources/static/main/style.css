@@ -108,3 +108,13 @@ main {
     border: 1px solid #ccc;
     margin-right: 10px;  /* 添加這行來給輸入框右側留有10像素的間距 */
 }
+
+.login-button{
+    border-radius: 20px;
+}
+#search-button{
+    border-radius: 20px;
+}
+form input[type="text"]{
+    border-radius: 20px;
+}
