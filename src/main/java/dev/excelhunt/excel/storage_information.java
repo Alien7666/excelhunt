@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.bson.types.ObjectId;
+@SuppressWarnings("NonAsciiCharacters")
 @Document(collection = "儲位資料")
 @Data
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class storage_information {
 
     private String 品名規格;
 
-    private String 產品編號_1;  // 這個欄位名稱在 Java 中可能需要調整，因為它可能與其他欄位產生混淆
+    private String 商品編號;
 
     private String 標示名稱;
 
