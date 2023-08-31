@@ -41,6 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         ,"login/**","login/icon.ico","login/css"
                         ,"error/**","error/icon.ico","error/css"
                         ,"/login","/login/style.css","/login/icon.ico"
+                        ,"/change-pwd/**","/change-pwd/icon.ico","/change-pwd/css"
                         ,"/**"
                 )// 允許這些端點可以被匿名訪問
                 .permitAll()

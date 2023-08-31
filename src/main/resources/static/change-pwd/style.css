@@ -1,0 +1,247 @@
+body {
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(45deg, #008cff, #d0ff00),repeat ;
+    animation:  8s ease infinite Gradient;
+    position: relative;
+    background-size: 100% 100%;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-control {
+    padding: 10px;
+    width: 100%;
+}
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+.no-underline {
+    text-decoration: none;
+    display: inline-block;
+}
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin: 0;
+    color: rgb(15, 0, 255);
+    padding: 10px 20px;
+}
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+.container {
+    text-align: center;
+    width: 300px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+input[type=text], input[type=password] {
+    width: 93%;  /* Adjusted width to provide equal padding on both sides */
+    padding: 15px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f1f1f1;
+    transition: background-color 0.3s, transform 0.3s;
+}
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    transform: translateY(-2px);
+}
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #83a4d4;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+    font-weight: bold;  /* Make button text clearer */
+    margin-top: 20px;
+}
+button:hover {
+    background-color: #b6fbff;
+    transform: translateY(-2px);
+}
+.error-message {
+    color: red; /* Change color to red */
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center; /* Center the text */
+}
+/*顯示密碼*/
+.toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;   /* 進一步增大圖標大小 */
+    position: absolute;
+    right: 23px;      /* 進一步微調位置以確保其位於輸入框內部 */
+    top: 57%;
+    transform: translateY(-50%);
+    outline: none;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    width: 42px;      /* 進一步增加寬度 */
+    height: 38px;     /* 進一步增加高度 */
+    box-shadow: none;       /* 移除陰影 */
+}
+.toggle-password:hover {
+    background-color: unset;
+    transform: translateY(-50%) scale(1.2);
+}
+.password-container {
+    position: relative;
+    display: inline-block;
+    width: 97%;  /* Same width as the input to make sure the button is positioned inside */
+}
+/* Update the toggle-password CSS to adjust its position based on the new container */
+.toggle-password {
+    right: 5px;  /* Adjusted to position it correctly inside the container */
+    top: 50%;    /* Adjusted to center it vertically inside the container */
+}
+/* 將整個表單固定在畫面中間 */
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 為表單添加一個淡白色的背景 */
+form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1%;
+    border-radius: 10px;
+}
+
+/* 調整表格的寬度 */
+form {
+    width: 25%;
+}
+/* 確保標籤和對應的輸入框有適當的間距 */
+.label-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* 確保 Emoji 正確定位在對應的 input box 的右側 */
+.input-emoji-container {
+    position: relative;
+}
+.input-emoji {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* To make the form more responsive */
+@media (max-width: 1500px) {
+    form {
+        width: 50%;
+    }
+    input[type=text], input[type=password] {
+        width: calc(100% - 33px);
+        padding: 15px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: #f1f1f1;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        transform: translateY(-2px);
+    }
+}
+@media (max-width: 800px) {
+    form {
+        width: 80%;
+    }
+}
+@media (min-width: 1930px) {
+    form {
+        width: 60%;
+    }
+    body{
+        font-size: 25px;
+    }
+    input[type=text], input[type=password] {
+        /* Adjusted width to provide equal padding on both sides */
+        /*取FORM表單大小減去PADDING*/
+        font-size: 25px;
+        width: calc(100% - 30px);
+        padding: 15px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: #f1f1f1;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        transform: translateY(-2px);
+    }
+    button{
+        font-size: 25px;
+    }
+}
+/* 校正Emoji的定位，適用於移動和桌面視圖 */
+.input-emoji-container {
+    position: relative;
+}
+.input-emoji {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/*將errormessage定位到form的最後面的正中間*/
+p {
+    color: red; /* Change color to red */
+    font-weight: bold;
+    position: relative;
+    margin: 50px 0 0 0;
+    text-align: center; /* Center the text */
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
