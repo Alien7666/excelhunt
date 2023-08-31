@@ -53,6 +53,7 @@ public class SearchController {
         storageResults.addAll(storageInformationRepository.searchByname(query));
         storageResults.addAll(storageInformationRepository.searchBytypename(query));
         storageResults.addAll(storageInformationRepository.searchBystorid(query));
+        storageResults.addAll(storageInformationRepository.searchBy商品編號(query));
 
 
         List<monthly_inventory> monthlyInventoryResults = new ArrayList<>();
