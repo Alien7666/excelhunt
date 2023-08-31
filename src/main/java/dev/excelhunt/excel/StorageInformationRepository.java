@@ -18,6 +18,6 @@ public interface StorageInformationRepository extends MongoRepository<storage_in
     @Query("{ '儲位資料' : { $regex: ?0, $options: 'i' } }")
     List<storage_information> searchBystorid(String storid);
 
-    @Query("{ '產品編號_1' : { $regex: ?0, $options: 'i' } }")
-    List<storage_information> searchBy產品編號_1(String 產品編號_1);
+    @Query("{ '商品編號' : { $regex: ?0, $options: 'i' } }")
+    List<storage_information> searchBy商品編號(String 商品編號);
 }

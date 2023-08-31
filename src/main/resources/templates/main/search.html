@@ -66,10 +66,11 @@
       </span>
      </p>
      <p>
-      產品編號.1:
-       <span th:text="${result['產品編號_1']}">
+      產品編號:
+       <span th:text="${result['商品編號']}">
       </span>
      </p>
+     <hr/>
     </div>
    </div>
    <div class="result-card" style="background-color: #cba77a" th:if="${!isInitialLoad and !isProductInformationResultsEmpty}">
@@ -87,6 +88,7 @@
        <span th:text="${result['貨品名稱']}">
       </span>
      </p>
+     <hr/>
     </div>
    </div>
    <div class="result-card" style="background-color: #9fcb88" th:if="${!isInitialLoad and !isGrossResultsEmpty}">
@@ -114,6 +116,7 @@
        <span th:text="${result['貨品條碼']}">
       </span>
      </p>
+     <hr/>
     </div>
    </div>
    <div class="result-card" style="background-color: #9c8ec9" th:if="${!isInitialLoad and !isMonthlyInventoryResultsEmpty}">
@@ -141,6 +144,7 @@
        <span th:text="${result['進貨單價']}">
       </span>
      </p>
+     <hr/>
     </div>
    </div>
   </main>
