@@ -18,8 +18,10 @@ public class MenuController {
         List<MenuItem> menuItems = new ArrayList<>();
         if (userDetails.getAuthorities().toString().contains("ROLE_ADMIN")) {
             menuItems.add(new MenuItem("密碼加密工具" ,"/api/password-encryption-tool"));
+            menuItems.add(new MenuItem("更改密碼" ,"/change-password"));
             menuItems.add(new MenuItem("",""));
         } else if (userDetails.getAuthorities().toString().contains("ROLE_USER")) {
+            menuItems.add(new MenuItem("更改密碼" ,"/change-password"));
             menuItems.add(new MenuItem("暫無功能(按下回主頁)","/"));
         }
         return ResponseEntity.ok(menuItems);
