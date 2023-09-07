@@ -45,108 +45,20 @@
      </button>
     </form>
    </div>
-   <div class="result-card" style="background-color: #89bcc9" th:if="${!isInitialLoad and !isStorageResultsEmpty}">
-    <h2 th:if="${!isInitialLoad and !isStorageResultsEmpty}">
-     儲位資訊 結果
-    </h2>
-    <div th:each="result : ${storageResults}">
-     <p>
-      產品編號:
-      <span th:text="${result['產品編號']}">
-      </span>
-     </p>
-     <p>
-      品名規格:
-       <span th:text="${result['品名規格']}">
-      </span>
-     </p>
-     <p>
-      儲位:
-       <span th:text="${result['儲位資料']}">
-      </span>
-     </p>
-     <p>
-      產品編號:
-       <span th:text="${result['商品編號']}">
-      </span>
-     </p>
-     <hr/>
-    </div>
-   </div>
-   <div class="result-card" style="background-color: #cba77a" th:if="${!isInitialLoad and !isProductInformationResultsEmpty}">
-    <h2 th:if="${!isInitialLoad and !isProductInformationResultsEmpty}">
-     產品資訊 結果
-    </h2>
-    <div th:each="result : ${productInformationResults}">
-     <p>
-      貨品編號:
-       <span th:text="${result['貨品編號']}">
-      </span>
-     </p>
-     <p>
-      貨品名稱:
-       <span th:text="${result['貨品名稱']}">
-      </span>
-     </p>
-     <hr/>
-    </div>
-   </div>
-   <div class="result-card" style="background-color: #9fcb88" th:if="${!isInitialLoad and !isGrossResultsEmpty}">
-    <h2 th:if="${!isInitialLoad and !isGrossResultsEmpty}">
-     毛量 結果
-    </h2>
-    <div th:each="result : ${grossResults}">
-     <p>
-      貨品名稱:
-       <span th:text="${result['貨品名稱']}">
-      </span>
-     </p>
-     <p>
-      類別名稱:
-      <span th:text="${result['類別名稱']}">
-      </span>
-     </p>
-     <p>
-      貨品廠牌:
-       <span th:text="${result['貨品廠牌']}">
-      </span>
-     </p>
-     <p>
-      貨品條碼:
-       <span th:text="${result['貨品條碼']}">
-      </span>
-     </p>
-     <hr/>
-    </div>
-   </div>
-   <div class="result-card" style="background-color: #9c8ec9" th:if="${!isInitialLoad and !isMonthlyInventoryResultsEmpty}">
-    <h2 th:if="${!isInitialLoad and !isMonthlyInventoryResultsEmpty}">
-     月庫存 結果
-    </h2>
-    <div th:each="result : ${monthlyInventoryResults}">
-     <p>
-      產品編號:
-       <span th:text="${result['貨品名稱']}">
-      </span>
-     </p>
-     <p>
-      期初數量:
-       <span th:text="${result['期初數量']}">
-      </span>
-     </p>
-     <p>
-      進貨數量:
-       <span th:text="${result['進貨數量']}">
-      </span>
-     </p>
-     <p>
-      進貨單價:
-       <span th:text="${result['進貨單價']}">
-      </span>
-     </p>
-     <hr/>
+   <div class="result-cards">
+    <div th:each="result : ${searchResults}" th:if="${!result.isEmpty()}" class="result-card">
+     <div class="result-body">
+      <div th:each="entry : ${result.entrySet()}">
+       <p th:text="${entry.key + ': ' + entry.value}"></p>
+      </div>
+     </div>
     </div>
    </div>
   </main>
+  <script>
+   window.onload = function() {
+     document.getElementById("search-input").focus();
+   }
+  </script>
  </body>
 </html>
