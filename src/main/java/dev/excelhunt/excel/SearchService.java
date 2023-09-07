@@ -21,7 +21,7 @@ public class SearchService {
     private MongoTemplate mongoTemplate;
 
     public List<Map<String, Object>> multiCollectionSearch(String searchText) {
-        // Normalize the search text
+
         String normalizedSearchText = normalize(searchText);
 
         List<String> collections = Arrays.asList("儲位資料", "月庫存", "毛量", "產品資料");
@@ -38,13 +38,13 @@ public class SearchService {
                 orCriteriaList.add(Criteria.where(fieldName).regex(".*" + Pattern.quote(normalizedSearchText) + ".*", "i"));
             }
 
-            // Check if orCriterias is not empty before adding it to the main criteria
+
             if (!orCriterias.isEmpty()) {
                 criteria.orOperator(orCriterias.toArray(new Criteria[0]));
             }
 
             Query query = new Query(criteria);
-//
+
             List<Map> rawResults = mongoTemplate.find(query, Map.class, collection);
             postProcessResults(rawResults);
             List<Map<String, Object>> results = new ArrayList<>();
@@ -64,7 +64,7 @@ public class SearchService {
 
 
     private String normalize(String searchText) {
-        // Remove special characters and convert to lower case
+
         return searchText.replaceAll("[>.]", "").toLowerCase();
     }
 
