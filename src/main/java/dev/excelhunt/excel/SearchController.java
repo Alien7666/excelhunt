@@ -12,27 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 @Controller
 public class SearchController {
-
-
     @Autowired
-    private StorageInformationRepository storageInformationRepository;
-
-    @Autowired
-    private ProductInformationRepository productInformationRepository;
-
-    @Autowired
-    private GrossRepository grossRepository;
-
-    @Autowired
-    private MonthlyInventoryRepository monthlyInventoryRepository;
-
-
+    private SearchService searchService;
 
     @GetMapping("/")
     public String showSearchForm(HttpSession session, Model model, Authentication authentication) {
@@ -47,51 +35,33 @@ public class SearchController {
 
     @PostMapping("/search")
     public String search(@RequestParam("query") String query, Model model, Authentication authentication) {
+        long startTime = System.currentTimeMillis();
 
-        List<storage_information> storageResults = new ArrayList<>();
-        storageResults.addAll(storageInformationRepository.searchByPW(query));
-        storageResults.addAll(storageInformationRepository.searchByname(query));
-        storageResults.addAll(storageInformationRepository.searchBytypename(query));
-        storageResults.addAll(storageInformationRepository.searchBystorid(query));
-        storageResults.addAll(storageInformationRepository.searchBy商品編號(query));
+        // 调用搜索服务并获取结果
+        List<Map<String, Object>> searchResults = searchService.multiCollectionSearch(query);
 
+        long endTime = System.currentTimeMillis();
+        System.out.println("Total search time: " + (endTime - startTime) + "ms");
+        // 将结果添加到Model中
+        model.addAttribute("searchResults", searchResults);
+        System.out.println("searchResults:" + searchResults);
 
-        List<monthly_inventory> monthlyInventoryResults = new ArrayList<>();
-        monthlyInventoryResults.addAll(monthlyInventoryRepository.searchBy貨品編號(query));
-        monthlyInventoryResults.addAll(monthlyInventoryRepository.searchBy貨品名稱(query));
-
-        List<gross> grossResults = new ArrayList<>();
-        grossResults.addAll(grossRepository.searchBy貨品編號(query));
-        grossResults.addAll(grossRepository.searchBy貨品名稱(query));
-        grossResults.addAll(grossRepository.searchBy流水編號(query));
-        grossResults.addAll(grossRepository.searchBy貨品條碼(query));
-        grossResults.addAll(grossRepository.searchBy貨品廠牌(query));
-        grossResults.addAll(grossRepository.searchBy類別編號(query));
-        grossResults.addAll(grossRepository.searchBy類別名稱(query));
-
-
-        List<product_information> productInformationResults = new ArrayList<>();
-        productInformationResults.addAll(productInformationRepository.searchBy貨品編號(query));
-        productInformationResults.addAll(productInformationRepository.searchBy貨品名稱(query));
-
-        model.addAttribute("isStorageResultsEmpty", storageResults.isEmpty());
-        model.addAttribute("isMonthlyInventoryResultsEmpty", monthlyInventoryResults.isEmpty());
-        model.addAttribute("isGrossResultsEmpty", grossResults.isEmpty());
-        model.addAttribute("isProductInformationResultsEmpty", productInformationResults.isEmpty());
-
-        model.addAttribute("storageResults", storageResults);
-        model.addAttribute("monthlyInventoryResults", monthlyInventoryResults);
-        model.addAttribute("grossResults", grossResults);
-        model.addAttribute("productInformationResults", productInformationResults);
+        // 保存搜索纪录
+        String userId = null;
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 获取用户username
+            userId = authentication.getName();
+        }
+        searchService.saveSearchRecord(query, userId);
 
         if (authentication != null) {
             model.addAttribute("isLoggedIn", true);
         } else {
             model.addAttribute("isLoggedIn", false);
         }
-
-
         model.addAttribute("isInitialLoad", false);
+
+        // 返回search.html模板
         return "main/search";
     }
 }

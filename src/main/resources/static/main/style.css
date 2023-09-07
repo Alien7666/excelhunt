@@ -51,7 +51,7 @@ main {
 
 /* Enhanced card style for search results with dynamic background */
 .result-card {
-    background-color: rgba(255, 255, 255, 0.9); /* Slight white background for better visibility */
+    background-color: rgba(0, 252, 164, 0.9); /* Slight white background for better visibility */
     border: 1px solid #ccc;
     padding: 20px;
     margin: 30px 0; /* Increased margin for clearer separation */
@@ -71,8 +71,8 @@ main {
 
 /* Responsive design for search result cards */
 .result-card {
-    flex: 1 1 300px; /* Flexbox grow, shrink, base width */
-    max-width: 400px; /* Maximum width of a card */
+    flex: 1 1 250px; /* Flexbox grow, shrink, base width */
+    max-width: 600px; /* Maximum width of a card */
     width: 100%; /* Take full width up to the max-width */
     box-sizing: border-box;
 }
@@ -114,4 +114,13 @@ main {
 #search-button:hover{
     background-color: #449d48;
     transform: translateY(-2px);
+}
+.result-cards{
+    min-width: 350px;
+    max-width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Gap between cards */
 }

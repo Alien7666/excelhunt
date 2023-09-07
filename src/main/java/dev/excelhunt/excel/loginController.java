@@ -45,16 +45,16 @@ public class loginController {
     }
 
 //    @PostMapping("/login")
-//    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
-//        User user = userRepository.findByUsername(username);
-//        System.out.println("username: " + username);
-//        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-//            System.out.println("password: " + password);
-//            session.setAttribute("username", username);
-//            System.out.println("登入成功");
-//            return "redirect:/control";
-//        }
-//        model.addAttribute("errorMessage", "帳號或密碼錯誤!");
-//        return "login/login";
+//       public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+//            User user = userRepository.findByUsername(username);
+//            System.out.println("username: " + username);
+//            if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+//                System.out.println("password: " + password);
+//                session.setAttribute("username", username);
+//                System.out.println("登入成功");
+//                return "redirect:/control";
+//            }
+//           model.addAttribute("errorMessage", "帳號或密碼錯誤!");
+//           return "login/login";
 //    }
 }
