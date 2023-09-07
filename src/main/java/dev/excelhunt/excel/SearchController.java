@@ -47,7 +47,7 @@ public class SearchController {
         System.out.println("searchResults:" + searchResults);
 
         // 保存搜索纪录
-        String userId = null;
+        String userId = "Guest";
         if (authentication != null && authentication.isAuthenticated()) {
             // 获取用户username
             userId = authentication.getName();
