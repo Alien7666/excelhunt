@@ -39,7 +39,7 @@
    <div class="search-container">
     <form action="/search" method="post">
      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-     <input id="search-input" name="query" placeholder="輸入搜尋內容" type="text"/>
+     <input id="search-input" name="query" placeholder="輸入搜尋內容" type="text" required/>
      <button id="search-button" type="submit">
       搜尋
      </button>

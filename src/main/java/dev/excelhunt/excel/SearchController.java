@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 
 @Controller
 public class SearchController {
     @Autowired
     private SearchService searchService;
+    @Autowired
+    private SearchServicemuticore searchServicemuticore;
 
     @GetMapping("/")
     public String showSearchForm(HttpSession session, Model model, Authentication authentication) {
@@ -38,7 +41,14 @@ public class SearchController {
         long startTime = System.currentTimeMillis();
 
         // 调用搜索服务并获取结果
-        List<Map<String, Object>> searchResults = searchService.multiCollectionSearch(query);
+        List<Map<String, Object>> searchResults = null;
+        try {
+            searchResults = searchServicemuticore.multiCollectionSearch(query);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        }
 
         long endTime = System.currentTimeMillis();
         System.out.println("Total search time: " + (endTime - startTime) + "ms");
@@ -52,7 +62,7 @@ public class SearchController {
             // 获取用户username
             userId = authentication.getName();
         }
-        searchService.saveSearchRecord(query, userId);
+        searchServicemuticore.saveSearchRecord(query, userId);
 
         if (authentication != null) {
             model.addAttribute("isLoggedIn", true);
