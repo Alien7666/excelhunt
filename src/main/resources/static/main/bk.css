@@ -1,21 +1,18 @@
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(45deg, #00fc93, #e600ff),repeat;
-    background-size: 400% 1000%;
-    animation: gradientAnimation 10s ease infinite;
-
+    height: 100vh;
+    background-size: 50000%;
+    animation: gradientAnimation 8s infinite alternate;
   }
-  
+
   @keyframes gradientAnimation {
-    0% {
-      background-position: 0 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0 50%;
-    }
+      0% {
+          background-position: left;
+      }
+      100%{
+          background-position: right;
+      }
   }
 
 @keyframes slideUpFadeIn {
@@ -31,4 +28,13 @@ body {
 
 .result-card {
     animation: slideUpFadeIn 0.8s forwards;
+}
+/*針對各家主流瀏覽器隱藏body的滾動條*/
+/*Chrome*/
+body::-webkit-scrollbar {
+    display: none;
+}
+/*edge*/
+body {
+    -ms-overflow-style: none;
 }

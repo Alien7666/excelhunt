@@ -116,11 +116,55 @@ main {
     transform: translateY(-2px);
 }
 .result-cards{
-    min-width: 350px;
-    max-width: 800px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     gap: 20px; /* Gap between cards */
+}
+.result-card {
+    float: left;
+    min-width: 350px;
+    max-width: 800px;
+    /* 其他現有的樣式 */
+}
+
+/* 清除浮動的方法 */
+.container-or-wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.container-or-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.result-card {
+    flex: 1;
+    min-width: 350px;
+    max-width: 800px;
+    margin: 10px;
+}
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: #ffde98; /* Modify the background color if needed */
+    color: #565454; /* This will be the color of the SVG */
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    opacity: 0; /* Start with hidden button */
+    transform: translateY(10px); /* Start slightly below its original position */
+    transition: opacity 0.3s, transform 0.3s; /* Animation properties */
+}
+
+#back-to-top svg {
+    width: 24px; /* You can adjust this based on your preference */
+    height: 24px;
 }

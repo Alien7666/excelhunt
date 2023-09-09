@@ -20,6 +20,7 @@ public class SearchServicemuticore {
     private MongoTemplate mongoTemplate;
     private ExecutorService executorService;
 
+    Map<String, String> thisCollectionTime = new HashMap<>();
     public SearchServicemuticore() {
         this.executorService = Executors.newFixedThreadPool(2);  // 假設有4個集合，因此使用4個線程。
     }
@@ -99,7 +100,8 @@ public class SearchServicemuticore {
         results.removeIf(map -> map.values().contains("NaN"));
 
         long collectionEndTime = System.currentTimeMillis();
-        System.out.println("Search time for collection '" + collection + "': " + (collectionEndTime - collectionStartTime) + "ms");
+        String timeValue = "搜尋" + collection + "的時間為: " + (collectionEndTime - collectionStartTime) + "ms";
+        thisCollectionTime.put(collection, timeValue);
         return results;
     }
 
@@ -129,7 +131,7 @@ public class SearchServicemuticore {
         return searchText.replaceAll("[>.]", "").toLowerCase();
     }
 
-    public void saveSearchRecord(String searchText, String userId) {
+    public void saveSearchRecord(String searchText, String userId ,String totalSearchTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Taipei"));
         String formattedDate = sdf.format(new Date());
@@ -141,6 +143,15 @@ public class SearchServicemuticore {
         searchRecord.put("searchText", searchText);
         searchRecord.put("userId", userId);
         searchRecord.put("timestamp", formattedDate);
+
+        for(Map.Entry<String, String> entry : thisCollectionTime.entrySet()){
+            String collectionName = entry.getKey();
+            String timeValue = entry.getValue();
+            searchRecord.put(collectionName, timeValue);
+        }
+
+        searchRecord.put("totalSearchTime", totalSearchTime);
+
         mongoTemplate.insert(searchRecord, "searchHistory");
     }
     // 新增的方法，用於過濾重複的字段值

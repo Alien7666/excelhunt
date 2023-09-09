@@ -39,26 +39,65 @@
    <div class="search-container">
     <form action="/search" method="post">
      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-     <input id="search-input" name="query" placeholder="輸入搜尋內容" type="text" required/>
+<!--     <input id="search-input" name="query"  placeholder="輸入搜尋內容" type="text" required/>-->
+     <input id="search-input" name="query"  type="text" th:placeholder="${keyword != null ? keyword : '請輸入內容'}" />
      <button id="search-button" type="submit">
       搜尋
      </button>
     </form>
    </div>
-   <div class="result-cards">
-    <div th:each="result : ${searchResults}" th:if="${!result.isEmpty()}" class="result-card">
-     <div class="result-body">
-      <div th:each="entry : ${result.entrySet()}">
-       <p th:text="${entry.key + ': ' + entry.value}"></p>
+   <div class="container-or-wrapper">
+    <div class="result-cards">
+     <div th:each="result : ${searchResults}" th:if="${!result.isEmpty()}" class="result-card">
+      <div class="result-body">
+       <div th:each="entry : ${result.entrySet()}">
+        <p th:text="${entry.key + ': ' + entry.value}"></p>
+       </div>
       </div>
      </div>
     </div>
-   </div>
+    </div>
+   <button id="back-to-top" title="返回顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/>
+    </svg>
+   </button>
   </main>
   <script>
    window.onload = function() {
      document.getElementById("search-input").focus();
    }
+  </script>
+  <script>
+<!--  動態調整Resultcard被景色  -->
+   window.addEventListener('DOMContentLoaded', (event) => {
+    let cards = document.querySelectorAll('.result-card');
+    cards.forEach(card => {
+     let r = Math.floor(Math.random() * 56)+185;
+     let g = Math.floor(Math.random() * 56)+185;
+     let b = Math.floor(Math.random() * 56)+185;
+     let bgColor = `rgba(${r}, ${g}, ${b}, 0.9)`;
+     card.style.backgroundColor = bgColor;
+    });
+   });
+  </script>
+  <script>
+   window.addEventListener('scroll', function() {
+    let backToTopBtn = document.getElementById('back-to-top');
+
+    if (window.pageYOffset > 100) {
+     backToTopBtn.style.display = 'block';
+     backToTopBtn.style.opacity = '1'; // Reveal the button
+     backToTopBtn.style.transform = 'translateY(0)'; // Move to its original position
+    } else {
+     backToTopBtn.style.opacity = '0'; // Hide the button
+     backToTopBtn.style.transform = 'translateY(10px)'; // Move slightly below
+    }
+   });
+
+   document.getElementById('back-to-top').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+   });
   </script>
  </body>
 </html>
