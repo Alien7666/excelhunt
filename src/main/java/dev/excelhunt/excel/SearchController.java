@@ -38,8 +38,8 @@ public class SearchController {
 
     @PostMapping("/search")
     public String search(@RequestParam("query") String query, Model model, Authentication authentication) {
+        // 获取当前时间
         long startTime = System.currentTimeMillis();
-
         // 调用搜索服务并获取结果
         List<Map<String, Object>> searchResults = null;
         try {
@@ -49,12 +49,13 @@ public class SearchController {
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         }
-
         long endTime = System.currentTimeMillis();
-        System.out.println("Total search time: " + (endTime - startTime) + "ms");
+
+        String totalTime = "Total search time: " + (endTime - startTime) + "ms";
         // 将结果添加到Model中
         model.addAttribute("searchResults", searchResults);
-        System.out.println("searchResults:" + searchResults);
+        String keyword = "現在顯示的結果為:"+query;
+        model.addAttribute("keyword", keyword);
 
         // 保存搜索纪录
         String userId = "Guest";
@@ -62,7 +63,7 @@ public class SearchController {
             // 获取用户username
             userId = authentication.getName();
         }
-        searchServicemuticore.saveSearchRecord(query, userId);
+        searchServicemuticore.saveSearchRecord(query, userId , totalTime);
 
         if (authentication != null) {
             model.addAttribute("isLoggedIn", true);
