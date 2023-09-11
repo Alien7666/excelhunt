@@ -21,13 +21,25 @@ public class SearchServicemuticore {
     private ExecutorService executorService;
 
     Map<String, String> thisCollectionTime = new HashMap<>();
+
+
+    public List<String> getCollections() {
+        Set<String> allCollections = mongoTemplate.getCollectionNames();
+        allCollections.remove("Settings");
+        allCollections.remove("searchHistory");
+        allCollections.remove("user");
+        return new ArrayList<>(allCollections);
+    }
+
+
+
     public SearchServicemuticore() {
         this.executorService = Executors.newFixedThreadPool(2);  // 假設有4個集合，因此使用4個線程。
     }
 
     public List<Map<String, Object>> multiCollectionSearch(String searchText) throws InterruptedException, ExecutionException {
         String normalizedSearchText = normalize(searchText);
-        List<String> collections = Arrays.asList("儲位資料", "月庫存", "毛量", "產品資料");
+        List<String> collections = getSelectedCollections();
         Map<String, Map<String, Object>> mergedResultsMap = new LinkedHashMap<>();
         List<Future<List<Map<String, Object>>>> futures = new ArrayList<>();
 
@@ -40,8 +52,19 @@ public class SearchServicemuticore {
             List<Map<String, Object>> results = future.get();
             mergedResultsMap = mergeResults(mergedResultsMap, results, normalizedSearchText);
         }
-//        return new ArrayList<>(mergedResultsMap.values());
-        return filterDuplicates(new ArrayList<>(mergedResultsMap.values()));
+
+        List<Map<String, Object>> filteredResults = filterBySelectedFields(mergedResultsMap);
+        return filterDuplicates(filteredResults);
+    }
+    private List<Map<String, Object>> filterBySelectedFields(Map<String, Map<String, Object>> mergedResultsMap) {
+        List<String> selectedFields = getSelectedFields();
+        return mergedResultsMap.values().stream()
+                .map(record -> {
+                    return record.entrySet().stream()
+                            .filter(entry -> selectedFields.contains(entry.getKey()))
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                })
+                .collect(Collectors.toList());
     }
 
     private Map<String, Map<String, Object>> mergeResults(Map<String, Map<String, Object>> mergedResultsMap, List<Map<String, Object>> results, String normalizedSearchText) {
@@ -115,7 +138,7 @@ public class SearchServicemuticore {
         }
     }
 
-    private Set<String> getFieldsForCollection(String collection) {
+    public Set<String> getFieldsForCollection(String collection) {
         Set<String> fields = new HashSet<>();
         Map<String, Object> firstEntry = mongoTemplate.findOne(new Query().limit(1), Map.class, collection);
 
@@ -174,4 +197,39 @@ public class SearchServicemuticore {
 
         return uniqueResults;
     }
+    public void saveSelectedFields(List<String> selectedFields) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("_id", "selectedFieldsConfig");  // Use a fixed ID
+        data.put("selectedFields", selectedFields);
+        mongoTemplate.save(data, "Settings");
+    }
+
+    public List<String> getSelectedFields() {
+        // Retrieve document based on specific _id
+        Map<String, Object> data = mongoTemplate.findOne(new Query(Criteria.where("_id").is("selectedFieldsConfig")), Map.class, "Settings");
+
+        if (data == null || !data.containsKey("selectedFields")) {
+            return new ArrayList<>();  // Return an empty list if data is null or doesn't contain "selectedFields"
+        }
+
+        return (List<String>) data.get("selectedFields");
+    }
+
+    // Retrieve the selected collections from the database
+    public List<String> getSelectedCollections() {
+        Document settings = mongoTemplate.findOne(new Query(Criteria.where("_id").is("selectedCollections")), Document.class, "Settings");
+        if (settings != null && settings.containsKey("selectedCollections")) {
+            return (List<String>) settings.get("selectedCollections");
+        }
+        return new ArrayList<>();
+    }
+
+    // Save the selected collections to the database
+    public void saveSelectedCollections(List<String> selectedCollections) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("_id", "selectedCollections");  // Use a fixed ID
+        data.put("selectedCollections", selectedCollections);
+        mongoTemplate.save(data, "Settings");
+    }
+
 }

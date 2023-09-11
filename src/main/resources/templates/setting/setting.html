@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>楷德蘆竹</title>
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+  <link th:media="all" type="text/css" th:rel="stylesheet" th:href="@{/setting/style.css}"/>
+<!--  <link th:media="all" type="text/css" th:rel="stylesheet" th:href="@{/main/style.css}"/>-->
+  <meta charset="utf-8"/>
+  <meta name="robots" content="noindex">
+  <meta name="googlebot" content="noindex">
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link rel="icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
+  <link rel="shortcut icon" th:href="@{/main/icon.ico}" type="image/x-icon"/>
+</head>
+<body>
+<div class="header">
+  <a href="/">楷德蘆竹</a>
+</div>
+<div class="container-or-wrapper">
+
+  <!-- First form for selecting fields within collections -->
+  <div class="form-wrapper">
+    <h3>請勾選要被顯示的字段</h3>
+    <form th:action="@{/setting/fields}" method="post">
+      <div class="result-cards">
+        <th:block th:each="collection : ${collections}">
+          <div th:if="${selectedCollections.contains(collection)}" class="result-card">
+            <h2 th:text="${collection}"></h2>
+            <ul>
+              <th:block th:each="field : ${#lists.toList(#ctx[collection])}">
+                <li style="list-style: none">
+                  <input type="checkbox" th:name="${field}" th:id="${field}" th:value="${field}" th:checked="${selectedFields.contains(field)}"/>
+                  <label th:for="${field}" th:text="${field}"></label>
+                </li>
+              </th:block>
+            </ul>
+          </div>
+        </th:block>
+        <button class="btn submit center-btn" type="submit" name="action" value="saveFields">保存字段</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Second form for selecting collections -->
+  <div class="form-wrapper">
+    <h3>請勾選要被顯示和搜尋的集合</h3>
+    <form th:action="@{/setting/collections}" method="post">
+      <div class="result-cards">
+        <th:block th:each="collection, iterStat : ${collections}">
+          <div class="result-card" th:classappend="'collection-card-' + ${iterStat.index % 4}">
+            <h2 th:text="${collection}"></h2>
+            <!-- Collection checkbox -->
+            <div>
+              <input type="checkbox" th:name="'collection_' + ${collection}" th:id="'collection_' + ${collection}" th:value="${collection}" th:checked="${selectedCollections.contains(collection)}"/>
+              <label th:for="'collection_' + ${collection}" th:text="${collection}"></label>
+            </div>
+          </div>
+        </th:block>
+        <button class="btn submit center-btn" type="submit" name="action" value="saveCollections">保存集合</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+  <!--  動態調整Resultcard被景色  -->
+  window.addEventListener('DOMContentLoaded', (event) => {
+    let cards = document.querySelectorAll('.result-card');
+    cards.forEach(card => {
+      let r = Math.floor(Math.random() * 56)+185;
+      let g = Math.floor(Math.random() * 56)+185;
+      let b = Math.floor(Math.random() * 56)+185;
+      let bgColor = `rgba(${r}, ${g}, ${b}, 0.9)`;
+      card.style.backgroundColor = bgColor;
+    });
+  });
+</script>
+<script>
+  window.addEventListener('scroll', function() {
+    let backToTopBtn = document.getElementById('back-to-top');
+
+    if (window.pageYOffset > 100) {
+      backToTopBtn.style.display = 'block';
+      backToTopBtn.style.opacity = '1'; // Reveal the button
+      backToTopBtn.style.transform = 'translateY(0)'; // Move to its original position
+    } else {
+      backToTopBtn.style.opacity = '0'; // Hide the button
+      backToTopBtn.style.transform = 'translateY(10px)'; // Move slightly below
+    }
+  });
+
+  document.getElementById('back-to-top').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
