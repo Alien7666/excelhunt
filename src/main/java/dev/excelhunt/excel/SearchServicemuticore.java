@@ -34,7 +34,7 @@ public class SearchServicemuticore {
 
 
     public SearchServicemuticore() {
-        this.executorService = Executors.newFixedThreadPool(2);  // 假設有4個集合，因此使用4個線程。
+        this.executorService = Executors.newFixedThreadPool(2);  // 假設有4個集合，因此使用2個線程。
     }
 
     public List<Map<String, Object>> multiCollectionSearch(String searchText) throws InterruptedException, ExecutionException {
