@@ -34,3 +34,6 @@ build/
 
 ### ENV file ###
 .env
+
+### GCP ###
+excel-cloud-search-703c4ad642b3.json
