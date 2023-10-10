@@ -30,9 +30,11 @@
     </header>
     <p>目前的連結是：<a th:href="${link}" th:text="${link}" target="_blank"></a></p>
     <form action="/update-link" method="post">
+        <div th:if="${error}" class="error" th:text="${error}" style="color:red;font-size: 1.5em"></div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <label for="newLink">新連結:</label>
         <input type="text" id="newLink" name="newLink">
-        <input type="submit" value="更新連結">
+        <input type="submit" value="更新連結" id="submitBtn" disabled>
     </form>
     <script>
         document.getElementById('menu-button').addEventListener('click', function() {
@@ -68,6 +70,20 @@
                     });
                 })
                 .catch(error => console.error("Error fetching menu items:", error));
+        });
+
+        // Disable submit button if newLink is not a google drive sharelink
+        document.getElementById("newLink").addEventListener("input", function() {
+            const linkValue = this.value;
+
+            // 正則表達式匹配 Google 試算表的分享網址
+            const googleSheetsRegex = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[^/]+\/edit\?(usp=sharing|usp=drive_link).*$/;
+
+            if (googleSheetsRegex.test(linkValue)) {
+                document.getElementById("submitBtn").disabled = false;
+            } else {
+                document.getElementById("submitBtn").disabled = true;
+            }
         });
     </script>
 </body>

@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         ,"/login","/login/style.css","/login/icon.ico"
                         ,"/change-pwd/**","/change-pwd/icon.ico","/change-pwd/css"
                         ,"/**"
+                        ,"/update-link"
+                        ,"/test"
                 )// 允許這些端點可以被匿名訪問
                 .permitAll()
                 .anyRequest()
@@ -60,7 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
