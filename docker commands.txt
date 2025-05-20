@@ -1,0 +1,15 @@
+docker build -t excelhunt .
+
+docker login
+
+docker tag excelhunt:latest alien7666/excelhunt:latest
+
+docker push alien7666/excelhunt:latest
+
+docker pull alien7666/excelhunt:latest
+
+docker run -d -p 8080:8080 --name 913 alien7666/excelhunt:latest
+docker run -d -p 8080:8080 --restart=unless-stopped --name excelhunt alien7666/excelhunt:latest
+
+docker kill excel
+docker logs excel
